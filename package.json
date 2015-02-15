@@ -1,0 +1,30 @@
+{
+  "name": "resizer",
+  "version": "0.0.1",
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.31"
+  },
+  "dependencies": {
+    "image-resizer": "~0.10.0",
+    "express": "^4.9.7",
+    "lodash": "~2.4.1",
+    "gm": "~1.14.2"
+  },
+  "devDependencies": {
+    "chai": "~1.9.0",
+    "connect-livereload": "~0.3.2",
+    "dotenv": "~0.2.8",
+    "ejs": "~1.0.0",
+    "gulp": "^3.6.2",
+    "gulp-bump": "^0.1.8",
+    "gulp-jshint": "~1.4.2",
+    "gulp-mocha": "~0.4.1",
+    "gulp-nodemon": "~1.0.0",
+    "gulp-util": "~2.2.14",
+    "jshint-stylish": "~0.1.5",
+    "sandboxed-module": "^1.0.0",
+    "sinon": "~1.8.2",
+    "sinon-chai": "~2.5.0"
+  }
+}
