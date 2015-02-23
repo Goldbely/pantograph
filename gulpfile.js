@@ -66,6 +66,6 @@ gulp.task('watch', ['lint'], function () {
     script: 'index.js',
     ext: 'js',
     env: env(),
-    ignore: ['node_modules/**/*.js']
+    ignore: ['node_modules/']
   }).on('restart', ['lint']);
 });
