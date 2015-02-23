@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "image-resizer": "git://github.com/jimmynicol/image-resizer.git#sharp",
+    "chalk": "~0.5.1",
     "express": "^4.9.7",
     "lodash": "~2.4.1",
     "gm": "~1.14.2",
