@@ -9,16 +9,39 @@ env     = ir.env;
 Img     = ir.img;
 streams = ir.streams;
 
+if (env.development) {
+  var exec = require('child_process').exec;
+  var chalk = require('chalk');
+
+  // check to see if vips is installed
+  exec ('vips --version', function (err, stdout, stderr) {
+    if (err || stderr) {
+      console.error(
+        chalk.red('\nMissing dependency:'),
+        chalk.red.bold('libvips')
+      );
+      console.log(
+        chalk.cyan('  to install vips on your system run:'),
+        chalk.bold('./node_modules/image_resizer/node_modules/sharp/preinstall.sh\n')
+      );
+    }
+  });
+}
+
+
 
 app.directory = __dirname;
 ir.expressConfig(app);
 
+app.get('/favicon.ico', function (request, response) {
+  response.sendStatus(404);
+});
 
 /**
 Return the modifiers map as a documentation endpoint
 */
 app.get('/modifiers.json', function(request, response){
-  response.status(200).json(ir.modifiers);
+  response.json(ir.modifiers);
 });
 
 
@@ -33,7 +56,7 @@ if (env.development){
 
   // Show the environment variables and their current values
   app.get('/env', function(request, response){
-    response.status(200).json(env);
+    response.json(env);
   });
 }
 
@@ -42,16 +65,16 @@ if (env.development){
 Return an image modified to the requested parameters
   - request format:
     /:modifers/path/to/image.format:metadata
-    eg: https://doapv6pcsx1wa.cloudfront.net/s50/sample/test.png
+    eg: https://my.cdn.com/s50/sample/test.png
 */
 app.get('/*?', function(request, response){
   var image = new Img(request);
 
   image.getFile()
     .pipe(new streams.identify())
-    .pipe(new streams.resize())
+    .pipe(new streams.resizeSharp())
     .pipe(new streams.filter())
-    .pipe(new streams.optimize())
+    .pipe(new streams.optimizeSharp())
     .pipe(streams.response(request, response));
 });
 
