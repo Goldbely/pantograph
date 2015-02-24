@@ -46,7 +46,7 @@ cp .env.example .env
 npm install
 ```
 
-Finally, edit your newly created `.env` file with the proper values. Don't forget to change the `LOCAL_FILE_PATH` as well.
+Finally, edit your newly created `.env` file with the proper values.
 
 ### Running
 
