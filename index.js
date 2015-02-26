@@ -28,6 +28,7 @@ if (env.development) {
   });
 }
 
+app.disable('x-powered-by');
 
 
 app.directory = __dirname;
@@ -69,6 +70,8 @@ Return an image modified to the requested parameters
 */
 app.get('/*?', function(request, response){
   var image = new Img(request);
+
+  response.header('X-Powered-By', 'Food from Goldbely');
 
   image.getFile()
     .pipe(new streams.identify())
