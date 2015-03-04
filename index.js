@@ -1,5 +1,7 @@
 'use strict';
 
+require('newrelic');
+
 var express, app, ir, env, Img, streams;
 
 express = require('express');
