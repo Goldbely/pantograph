@@ -1,5 +1,9 @@
 'use strict';
 
+if (process.env.NEW_RELIC_LICENSE_KEY){
+  require('newrelic');
+}
+
 var express, app, ir, env, Img, streams;
 
 express = require('express');
