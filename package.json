@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/jgillman/pantograph.git"
+    "type": "git",
+    "url": "https://github.com/jgillman/pantograph.git"
   },
   "private": true,
   "description": "Heroku deployable image resizing service.",
@@ -12,11 +12,12 @@
     "node": ">=0.10.35"
   },
   "dependencies": {
-    "image-resizer": "git://github.com/jimmynicol/image-resizer.git#sharp",
     "chalk": "~0.5.1",
     "express": "^4.9.7",
-    "lodash": "~2.4.1",
     "gm": "~1.14.2",
+    "image-resizer": "git://github.com/jimmynicol/image-resizer.git#sharp",
+    "lodash": "~2.4.1",
+    "newrelic": "^1.17.0",
     "sharp": "^0.8.3"
   },
   "devDependencies": {
