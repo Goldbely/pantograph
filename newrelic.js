@@ -19,6 +19,15 @@ exports.config = {
      * issues with the agent, 'info' and higher will impose the least overhead on
      * production applications.
      */
-    level : 'info'
+    level : 'info',
+    /**
+     * Where to put the log file -- by default just uses process.cwd +
+     * 'newrelic_agent.log'. A special case is a filepath of 'stdout',
+     * in which case all logging will go to stdout, or 'stderr', in which
+     * case all logging will go to stderr.
+     *
+     * @env NEW_RELIC_LOG
+     */
+    filepath : 'stdout'
   }
 };
