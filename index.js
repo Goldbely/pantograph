@@ -4,9 +4,10 @@ if (process.env.NEW_RELIC_LICENSE_KEY){
   require('newrelic');
 }
 
-var express, app, ir, env, Img, streams;
+var express, rollbar, app, ir, env, Img, streams;
 
 express = require('express');
+rollbar = require('rollbar');
 app     = express();
 ir      = require('image-resizer');
 env     = ir.env;
@@ -85,6 +86,10 @@ app.get('/*?', function(request, response){
     .pipe(streams.response(request, response));
 });
 
+// Use the rollbar error handler to send exceptions to your rollbar account
+if(process.env.ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN) {
+  app.use(rollbar.errorHandler(process.env.ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN));
+}
 
 /**
 Start the app on the listed port
