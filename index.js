@@ -43,6 +43,10 @@ app.get('/favicon.ico', function (request, response) {
   response.sendStatus(404);
 });
 
+app.get('/robots.txt', function(request, response){
+  response.sendStatus(404);
+});
+
 /**
 Return the modifiers map as a documentation endpoint
 */
