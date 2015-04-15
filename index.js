@@ -43,7 +43,7 @@ app.get('/favicon.ico', function (request, response) {
   response.sendStatus(404);
 });
 
-app.get('/robots.txt', function(request, response){
+app.get('/robots.txt', function (request, response) {
   response.sendStatus(404);
 });
 
@@ -84,9 +84,9 @@ app.get('/*?', function(request, response){
 
   image.getFile()
     .pipe(new streams.identify())
-    .pipe(new streams.resizeSharp())
+    .pipe(new streams.resize())
     .pipe(new streams.filter())
-    .pipe(new streams.optimizeSharp())
+    .pipe(new streams.optimize())
     .pipe(streams.response(request, response));
 });
 

@@ -9,17 +9,16 @@
   "private": true,
   "description": "Heroku deployable image resizing service.",
   "engines": {
-    "node": ">=0.10.35"
+    "node": "0.12.x"
   },
   "dependencies": {
-    "chalk": "~0.5.1",
+    "aws-sdk": "~2.0.0-rc9",
+    "chalk": "~1.0.0",
     "express": "^4.9.7",
-    "gm": "~1.14.2",
-    "image-resizer": "git://github.com/jimmynicol/image-resizer.git#sharp",
+    "image-resizer": "~1.0.0",
     "lodash": "~2.4.1",
     "newrelic": "^1.17.0",
-    "rollbar": "^0.4.4",
-    "sharp": "^0.8.3"
+    "rollbar": "^0.4.4"
   },
   "devDependencies": {
     "chai": "~1.9.0",

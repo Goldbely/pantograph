@@ -55,3 +55,14 @@ Use `gulp watch` to start your local server.
 [jimmynicol]: https://github.com/jimmynicol
 [image-resizer]: https://github.com/jimmynicol/image-resizer
 [sharp]: https://github.com/lovell/sharp
+
+
+## Default Image
+
+The `.env` has a `IMAGE_404` variable that should be set as a path to an image relative to your base URL.
+
+When using S3 the path is relative to the bucket root.
+
+When using Local the path is relative to `LOCAL_FILE_PATH`.
+
+**Always** make sure the `IMAGE_404` is set as the plugin code isn't very fault tolerant to that not existing yet.
