@@ -28,6 +28,7 @@ function s3Stream(image){
   stream.Readable.call(this, { objectMode : true });
   this.image = image;
   this.ended = false;
+  this.readAttemptCount = 0;
 }
 
 util.inherits(s3Stream, stream.Readable);
@@ -36,6 +37,8 @@ s3Stream.prototype._read = function(){
   var _this = this;
 
   if ( this.ended ){ return; }
+
+  this.readAttemptCount += 1;
 
   // pass through if there is an error on the image object
   if (this.image.isError()){
@@ -57,10 +60,15 @@ s3Stream.prototype._read = function(){
 
     // if there is an error rewrite the path and _read again
     if (err) {
-      // FIXME Add some kind of load-attempts counter to prevent infinite loop
-      _this.image.path = process.env.IMAGE_404;
-      _this._read();
-      return;
+      // if this is our second loop, accept defeat and error out
+      if (_this.readAttemptCount > 1) {
+        _this.image.error = new Error(err);
+      }
+      else {
+        _this.image.path = process.env.IMAGE_404;
+        _this._read();
+        return;
+      }
     }
 
     // if not store the image buffer
