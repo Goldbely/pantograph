@@ -28,7 +28,7 @@ function s3Stream(image){
   stream.Readable.call(this, { objectMode : true });
   this.image = image;
   this.ended = false;
-  this.readAttemptCount = 0;
+  this.readErrorAttemptCount = 0;
 }
 
 util.inherits(s3Stream, stream.Readable);
@@ -37,8 +37,6 @@ s3Stream.prototype._read = function(){
   var _this = this;
 
   if ( this.ended ){ return; }
-
-  this.readAttemptCount += 1;
 
   // pass through if there is an error on the image object
   if (this.image.isError()){
@@ -58,13 +56,15 @@ s3Stream.prototype._read = function(){
   client.getObject(awsOptions, function(err, data){
     _this.image.log.timeEnd('s3');
 
-    // if there is an error rewrite the path and _read again
     if (err) {
+      _this.readErrorAttemptCount += 1;
+
       // if this is our second loop, accept defeat and error out
-      if (_this.readAttemptCount > 1) {
+      if (_this.readErrorAttemptCount > 1) {
         _this.image.error = new Error(err);
       }
       else {
+        // rewrite the path and _read again
         _this.image.path = process.env.IMAGE_404;
         _this._read();
         return;

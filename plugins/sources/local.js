@@ -18,7 +18,7 @@ function Local(image){
   this.path = image.path.replace(/^elocal/i,'');
   this.filePath = env.LOCAL_FILE_PATH + '/' + this.path;
   this.ended = false;
-  this.readAttemptCount = 0;
+  this.readErrorAttemptCount = 0;
 }
 
 util.inherits(Local, stream.Readable);
@@ -27,8 +27,6 @@ util.inherits(Local, stream.Readable);
 Local.prototype._read = function(){
   var _this = this;
   if ( this.ended ){ return; }
-
-  this.readAttemptCount += 1;
 
   // pass through if there is an error on the image object
   if (this.image.isError()){
@@ -42,13 +40,15 @@ Local.prototype._read = function(){
   fs.readFile(_this.filePath, function(err, data){
     _this.image.log.timeEnd('local filesystem');
 
-    // if there is an error store it on the image object and pass it along
     if (err) {
+      _this.readErrorAttemptCount += 1;
+
       // if this is our second loop, accept defeat and error out
-      if (_this.readAttemptCount > 1) {
+      if (_this.readErrorAttemptCount > 1) {
         _this.image.error = new Error(err);
       }
       else {
+        // rewrite the path and _read again
         _this.filePath = env.LOCAL_FILE_PATH + '/' + env.IMAGE_404;
         _this._read();
         return;
