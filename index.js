@@ -80,6 +80,7 @@ Return an image modified to the requested parameters
 app.get('/*?', function(request, response){
   var image = new Img(request);
 
+  response.header('Content-Encoding', 'identity');
   response.header('X-Powered-By', 'Food from Goldbely');
 
   image.getFile()
