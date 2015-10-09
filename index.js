@@ -80,6 +80,7 @@ Return an image modified to the requested parameters
 app.get('/*?', function(request, response){
   var image = new Img(request);
 
+  response.header( 'Last-Modified', new Date('2015-10-01').toUTCString() );
   response.header('X-Powered-By', 'Food from Goldbely');
 
   image.getFile()
