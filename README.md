@@ -26,8 +26,10 @@ For using Pantograph with local development.
 You will need to install the [Sharp image processing library][sharp]. If you're on a Mac:
 
 ```sh
-brew install homebrew/science/vips --with-webp --with-graphicsmagick
+brew install homebrew/science/vips7 --with-webp --with-graphicsmagick
 ```
+
+> **Heads up!** Make sure you're installing `vips7` and not `vips`. Currently sharp only works with vips version 7.x
 
 If you're not on a Mac or run into trouble, check out [Sharp][sharp]'s repo for installation instructions.
 
