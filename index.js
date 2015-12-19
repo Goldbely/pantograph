@@ -93,6 +93,7 @@ app.get('/*?', function(request, response){
 // Use the rollbar error handler to send exceptions to your rollbar account
 if(process.env.ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN) {
   app.use(rollbar.errorHandler(process.env.ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN));
+  rollbar.handleUncaughtExceptions(process.env.ROLLBAR_POST_CLIENT_ITEM_ACCESS_TOKEN, {});
 }
 
 /**
