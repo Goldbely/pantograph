@@ -68,3 +68,7 @@ When using S3 the path is relative to the bucket root.
 When using Local the path is relative to `LOCAL_FILE_PATH`.
 
 **Always** make sure the `IMAGE_404` is set as the plugin code isn't very fault tolerant to that not existing yet.
+
+---
+
+<a href="https://zenhub.com"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png"></a>
