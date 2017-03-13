@@ -11,5 +11,6 @@ services:
       NODE_ENV: "production"
     ports:
       - "3001:80"
+    restart: always
     volumes:
       - ./local_images:/images
