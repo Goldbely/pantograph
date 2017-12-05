@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  web:
+    build: .
+    environment:
+      CACHE_DEV_REQUESTS: "true"
+      DEFAULT_SOURCE: "local"
+      IMAGE_404: "default.jpg"
+      LOCAL_FILE_PATH: /images
+      NODE_ENV: "production"
+    ports:
+      - "3001:80"
+    restart: always
+    volumes:
+      - ./local_images:/images
